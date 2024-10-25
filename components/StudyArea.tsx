@@ -20,6 +20,7 @@ import { ChevronLeft, ChevronRight, Trash2, Share2, Twitter, Facebook, Linkedin,
 import "react-pdf/dist/esm/Page/TextLayer.css"
 import EnhancedChatMessage from './enhanced-chat-message'
 import { fetchEventSource } from '@microsoft/fetch-event-source';
+import { BACKEND_URL } from '../config';
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -216,7 +217,7 @@ export function StudyArea({
     setPdfLoadError(null);
 
     try {
-      const apiUrl = `http://localhost:8000/pdf/${user.uid}/${encodeURIComponent(previewFile.name)}`;
+      const apiUrl = `${BACKEND_URL}/pdf/${user.uid}/${encodeURIComponent(previewFile.name)}`;
       const idToken = await user.getIdToken();
 
       const response = await fetch(apiUrl, {
@@ -258,7 +259,7 @@ export function StudyArea({
     setChatHistoryError(null);
 
     try {
-      const response = await fetch(`http://localhost:8000/chat_history/${encodeURIComponent(fileName)}`, {
+      const response = await fetch(`${BACKEND_URL}/chat_history/${encodeURIComponent(fileName)}`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -604,7 +605,7 @@ export function StudyArea({
     try {
       const idToken = await user.getIdToken();
       
-      await fetchEventSource(`http://localhost:8000/ask_stream/${encodeURIComponent(previewFile.name)}`, {
+      await fetchEventSource(`${BACKEND_URL}/ask_stream/${encodeURIComponent(previewFile.name)}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

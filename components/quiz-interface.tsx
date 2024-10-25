@@ -21,6 +21,8 @@ import { Check, X, MessageCircle, LogOut, Loader2 } from "lucide-react"
 import { auth } from "../firebase"
 import ReactMarkdown from 'react-markdown'
 
+import { BACKEND_URL } from '../config';
+
 interface QuizInterfaceProps {
   quizType: 'mcq' | 'shortAnswer'
   level: string
@@ -72,7 +74,7 @@ export function QuizInterface({ quizType, level, questionCount, fileName, questi
       const idToken = await user.getIdToken();
 
       try {
-        const response = await fetch('http://localhost:8000/explain', {
+        const response = await fetch(`${BACKEND_URL}/explain`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

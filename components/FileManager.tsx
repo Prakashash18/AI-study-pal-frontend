@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useState, useRef, useEffect, useCallback } from 'react'
@@ -23,6 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { motion } from 'framer-motion'
 import { toast } from "@/hooks/use-toast"
+import { BACKEND_URL } from '../config'
 
 /// <reference lib="dom" />
 
@@ -271,7 +271,7 @@ export function FileManager({
     try {
       const idToken = await user.getIdToken();
       
-      const response = await fetch(`http://localhost:8000/pdf/${user.uid}/${file.id}`, { // Corrected endpoint
+      const response = await fetch(`${BACKEND_URL}/pdf/${user.uid}/${file.id}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${idToken}`,

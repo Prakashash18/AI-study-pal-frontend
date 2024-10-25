@@ -18,6 +18,7 @@ import { QuizInterface } from "./quiz-interface"
 // Add these imports at the top of the file
 import { storage } from "../firebase"
 import { ref, getDownloadURL } from "firebase/storage"
+import { BACKEND_URL } from '../config'
 
 // Update the FileInfo interface
 interface FileInfo {
@@ -110,7 +111,7 @@ export function QuizArea({ previewFile, files, handleFileSelection }: QuizAreaPr
       difficulty: quizLevel,
     };
     console.log("starting quiz");
-    const endpoint = selectedQuizType === 'mcq' ? 'http://localhost:8000/generate-mcqs' : 'http://localhost:8000/quiz/short_answer';
+    const endpoint = selectedQuizType === 'mcq' ? `${BACKEND_URL}/generate-mcqs` : `${BACKEND_URL}/quiz/short_answer`;
 
     const user = auth.currentUser;
     if (!user) {
