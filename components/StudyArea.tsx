@@ -22,7 +22,6 @@ import EnhancedChatMessage from './enhanced-chat-message'
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import { BACKEND_URL } from '../config';
 
-
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
   import.meta.url,
@@ -267,7 +266,6 @@ export function StudyArea({
           'Content-Type': 'application/json'
         }
       });
-
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -333,7 +331,6 @@ export function StudyArea({
       setContextMenuPosition(null);
     }
   }, []);
-
   const handleAddToChat = useCallback(() => {
     if (selectedText) {
       mobileChatInputRef.current?.handleAddCard(selectedText)
@@ -997,3 +994,4 @@ export function StudyArea({
     </div>
   )
 }
+

@@ -3,8 +3,17 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Brain, Rocket, Zap } from "lucide-react"
+import { useState } from "react"
 
 export default function LandingPage() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleClick = () => {
+    setIsLoading(true)
+    // The loading state will be cleared when the navigation completes
+    // or if there's an error
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-14 flex items-center justify-between">
@@ -38,10 +47,27 @@ export default function LandingPage() {
               </div>
               <div className="space-x-4">
                 <Link href="/auth">
-                  <Button className="bg-white text-purple-600 hover:bg-gray-100">Join Beta</Button>
+                  <Button 
+                    className="bg-white text-purple-600 hover:bg-gray-100"
+                    onClick={handleClick}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <>
+                        <span className="animate-spin mr-2">⏳</span>
+                        Loading..
+                      </>
+                    ) : (
+                      "Join Beta"
+                    )}
+                  </Button>
                 </Link>
                 <Link href="#features">
-                  <Button variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-purple-600">
+                  <Button 
+                    variant="outline" 
+                    className="bg-transparent border-white text-white hover:bg-white hover:text-purple-600"
+                    disabled={isLoading}
+                  >
                     Learn More
                   </Button>
                 </Link>
@@ -104,7 +130,20 @@ export default function LandingPage() {
               </CardContent>
               <CardFooter>
                 <Link href="/auth" className="w-full">
-                  <Button className="w-full bg-purple-500 hover:bg-purple-600">Join Beta Program</Button>
+                  <Button 
+                    className="w-full bg-purple-500 hover:bg-purple-600"
+                    onClick={handleClick}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <>
+                        <span className="animate-spin mr-2">⏳</span>
+                        Loading...
+                      </>
+                    ) : (
+                      "Join Beta Program"
+                    )}
+                  </Button>
                 </Link>
               </CardFooter>
             </Card>
